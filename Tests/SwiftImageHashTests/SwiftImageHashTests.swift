@@ -34,7 +34,7 @@ struct SwiftImageHashTests {
         print(SwiftImageHash.distanceBetween(phash1!, phash3!)!)
         print(SwiftImageHash.distanceBetween(phash2!, phash3!)!)
         
-        guard let image4 = loadImageFromResource(named: "Lenna") else {
+        guard let image4 = loadImageFromResource(named: "lenna") else {
             Issue.record("Failed to load image")
             return
         }
@@ -43,7 +43,7 @@ struct SwiftImageHashTests {
         print(SwiftImageHash.distanceBetween(phash2!, phash4!)!)
         print(SwiftImageHash.distanceBetween(phash3!, phash4!)!)
         
-        guard let image5 = loadImageFromResource(named: "Mandrill") else {
+        guard let image5 = loadImageFromResource(named: "mandrill") else {
             Issue.record("Failed to load image")
             return
         }
@@ -52,7 +52,7 @@ struct SwiftImageHashTests {
         print(SwiftImageHash.distanceBetween(phash3!, phash5!)!)
         print(SwiftImageHash.distanceBetween(phash4!, phash5!)!)
         
-        guard let image6 = loadImageFromResource(named: "Pepper") else {
+        guard let image6 = loadImageFromResource(named: "pepper") else {
             Issue.record("Failed to load image")
             return
         }
@@ -60,5 +60,14 @@ struct SwiftImageHashTests {
         print(phash6!)
         print(SwiftImageHash.distanceBetween(phash4!, phash6!)!)
         print(SwiftImageHash.distanceBetween(phash5!, phash6!)!)
+        
+        guard let image7 = loadImageFromResource(named: "mandrill_duplicate") else {
+            Issue.record("Failed to load image")
+            return
+        }
+        let phash7 = SwiftImageHash.phash(image: image7)
+        print(phash7!)
+        print(SwiftImageHash.distanceBetween(phash6!, phash7!)!)
+        print(SwiftImageHash.distanceBetween(phash5!, phash7!)!)
     }
 }
