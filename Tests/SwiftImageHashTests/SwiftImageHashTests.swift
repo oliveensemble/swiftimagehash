@@ -5,69 +5,76 @@
 //  Created by Elle Lewis on 11/16/25.
 //
 
-import Testing
 @testable import SwiftImageHash
+import Testing
 
 struct SwiftImageHashTests {
-    @Test func testDistanceCalculations() {
-        guard let astronautL = loadImageFromResource(named: "astronaut_L") else {
-            Issue.record("Failed to load image")
-            return
-        }
-        let astronautLHash = SwiftImageHash.phash(image: astronautL)
-        print(astronautLHash!)
-        
-        guard let astronautM = loadImageFromResource(named: "astronaut_M") else {
-            Issue.record("Failed to load image")
-            return
-        }
-        let astronautMHash = SwiftImageHash.phash(image: astronautM)
-        print(astronautMHash!)
-        print(SwiftImageHash.distanceBetween(astronautLHash!, astronautMHash!)!)
-        
-        guard let astronaut = loadImageFromResource(named: "astronaut") else {
-            Issue.record("Failed to load image")
-            return
-        }
-        let astronautHash = SwiftImageHash.phash(image: astronaut)
-        print(astronautHash!)
-        print(SwiftImageHash.distanceBetween(astronautLHash!, astronautHash!)!)
-        print(SwiftImageHash.distanceBetween(astronautMHash!, astronautHash!)!)
-        
-        guard let lenna = loadImageFromResource(named: "lenna") else {
-            Issue.record("Failed to load image")
-            return
-        }
-        let lennaHash = SwiftImageHash.phash(image: lenna)
-        print(lennaHash!)
-        print(SwiftImageHash.distanceBetween(astronautMHash!, lennaHash!)!)
-        print(SwiftImageHash.distanceBetween(astronautHash!, lennaHash!)!)
-        
-        guard let mandrill = loadImageFromResource(named: "mandrill") else {
-            Issue.record("Failed to load image")
-            return
-        }
+    let astronaut = loadImageFromResource(named: "astronaut")!
+    let astronautM = loadImageFromResource(named: "astronaut_M")!
+    let astronautL = loadImageFromResource(named: "astronaut_L")!
+    let lenna = loadImageFromResource(named: "lenna")!
+    let mandrill = loadImageFromResource(named: "mandrill")!
+    let mandrillDuplicate = loadImageFromResource(named: "mandrill_duplicate")!
+    let pepper = loadImageFromResource(named: "pepper")!
+
+    @Test func duplicateDistance() throws {
         let mandrillHash = SwiftImageHash.phash(image: mandrill)
-        print(mandrillHash!)
-        print(SwiftImageHash.distanceBetween(astronautHash!, mandrillHash!)!)
-        print(SwiftImageHash.distanceBetween(lennaHash!, mandrillHash!)!)
-        
-        guard let pepper = loadImageFromResource(named: "pepper") else {
-            Issue.record("Failed to load image")
-            return
-        }
-        let pepperHash = SwiftImageHash.phash(image: pepper)
-        print(pepperHash!)
-        print(SwiftImageHash.distanceBetween(lennaHash!, pepperHash!)!)
-        print(SwiftImageHash.distanceBetween(mandrillHash!, pepperHash!)!)
-        
-        guard let mandrillDuplicate = loadImageFromResource(named: "mandrill_duplicate") else {
-            Issue.record("Failed to load image")
-            return
-        }
+        try #require(mandrillHash != nil)
+
         let mandrillDuplicateHash = SwiftImageHash.phash(image: mandrillDuplicate)
-        print(mandrillDuplicateHash!)
-        print(SwiftImageHash.distanceBetween(pepperHash!, mandrillDuplicateHash!)!)
-        print(SwiftImageHash.distanceBetween(mandrillHash!, mandrillDuplicateHash!)!)
+        try #require(mandrillDuplicateHash != nil)
+
+        let distance = SwiftImageHash.distanceBetween(mandrillHash!, mandrillDuplicateHash!)
+        try #require(distance != nil)
+
+        #expect(distance == 0)
+    }
+
+    @Test func largerFileDuplicateDistance() throws {
+        let astronautHash = SwiftImageHash.phash(image: astronaut)
+        try #require(astronautHash != nil)
+
+        let astronautLHash = SwiftImageHash.phash(image: astronautL)
+        try #require(astronautLHash != nil)
+
+        print(astronautHash!)
+        print(astronautLHash!)
+
+        let distance = SwiftImageHash.distanceBetween(astronautHash!, astronautLHash!)
+        try #require(distance != nil)
+
+        #expect(distance == 12)
+    }
+
+    @Test func smallerFileDuplicateDistance() throws {
+        let astronautLHash = SwiftImageHash.phash(image: astronautL)
+        try #require(astronautLHash != nil)
+
+        let astronautMHash = SwiftImageHash.phash(image: astronautM)
+        try #require(astronautMHash != nil)
+
+        print(astronautLHash!)
+        print(astronautMHash!)
+
+        let distance = SwiftImageHash.distanceBetween(astronautLHash!, astronautMHash!)
+        try #require(distance != nil)
+
+        #expect(distance == 0)
+    }
+
+    @Test func differentFileDuplicateDistance() throws {
+        let lennaHash = SwiftImageHash.phash(image: lenna)
+        try #require(lennaHash != nil)
+
+        let pepperHash = SwiftImageHash.phash(image: pepper)
+        try #require(pepperHash != nil)
+
+        print(lennaHash!)
+        print(pepperHash!)
+
+        let distance = SwiftImageHash.distanceBetween(lennaHash!, pepperHash!)
+        try #require(distance != nil)
+
+        #expect(distance == 30)
     }
 }

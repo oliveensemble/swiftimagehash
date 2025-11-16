@@ -34,7 +34,7 @@ final class SwiftImageHashPerformanceTests: XCTestCase {
         print(SwiftImageHash.distanceBetween(phash1!, phash3!)!)
         print(SwiftImageHash.distanceBetween(phash2!, phash3!)!)
         
-        guard let image4 = loadImageFromResource(named: "Lenna") else {
+        guard let image4 = loadImageFromResource(named: "lenna") else {
             XCTFail("Failed to load the image.")
             return
         }
@@ -43,7 +43,7 @@ final class SwiftImageHashPerformanceTests: XCTestCase {
         print(SwiftImageHash.distanceBetween(phash2!, phash4!)!)
         print(SwiftImageHash.distanceBetween(phash3!, phash4!)!)
         
-        guard let image5 = loadImageFromResource(named: "Mandrill") else {
+        guard let image5 = loadImageFromResource(named: "mandrill") else {
             XCTFail("Failed to load the image.")
             return
         }
@@ -52,7 +52,7 @@ final class SwiftImageHashPerformanceTests: XCTestCase {
         print(SwiftImageHash.distanceBetween(phash3!, phash5!)!)
         print(SwiftImageHash.distanceBetween(phash4!, phash5!)!)
         
-        guard let image6 = loadImageFromResource(named: "Pepper") else {
+        guard let image6 = loadImageFromResource(named: "pepper") else {
             XCTFail("Failed to load the image.")
             return
         }
