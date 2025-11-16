@@ -1,24 +1,24 @@
-//
-//  SwiftImageHashTests.swift
-//  SwiftImageHash
-//
-//  Created by Elle Lewis on 11/16/25.
-//
-
-import Testing
+import XCTest
 @testable import SwiftImageHash
 
-struct SwiftImageHashTests {
-    @Test func testDistanceCalculations() {
+final class SwiftImageHashPerformanceTests: XCTestCase {
+    func testPerformance() {
+        measure {
+            // Code to test
+            testPhash()
+        }
+    }
+    
+    func testPhash() {
         guard let image1 = loadImageFromResource(named: "astronaut_L") else {
-            Issue.record("Failed to load image")
+            XCTFail("Failed to load the image.")
             return
         }
         let phash1 = SwiftImageHash.phash(image: image1)
         print(phash1!)
         
         guard let image2 = loadImageFromResource(named: "astronaut_M") else {
-            Issue.record("Failed to load image")
+            XCTFail("Failed to load the image.")
             return
         }
         let phash2 = SwiftImageHash.phash(image: image2)
@@ -26,7 +26,7 @@ struct SwiftImageHashTests {
         print(SwiftImageHash.distanceBetween(phash1!, phash2!)!)
         
         guard let image3 = loadImageFromResource(named: "astronaut") else {
-            Issue.record("Failed to load image")
+            XCTFail("Failed to load the image.")
             return
         }
         let phash3 = SwiftImageHash.phash(image: image3)
@@ -35,7 +35,7 @@ struct SwiftImageHashTests {
         print(SwiftImageHash.distanceBetween(phash2!, phash3!)!)
         
         guard let image4 = loadImageFromResource(named: "Lenna") else {
-            Issue.record("Failed to load image")
+            XCTFail("Failed to load the image.")
             return
         }
         let phash4 = SwiftImageHash.phash(image: image4)
@@ -44,7 +44,7 @@ struct SwiftImageHashTests {
         print(SwiftImageHash.distanceBetween(phash3!, phash4!)!)
         
         guard let image5 = loadImageFromResource(named: "Mandrill") else {
-            Issue.record("Failed to load image")
+            XCTFail("Failed to load the image.")
             return
         }
         let phash5 = SwiftImageHash.phash(image: image5)
@@ -53,7 +53,7 @@ struct SwiftImageHashTests {
         print(SwiftImageHash.distanceBetween(phash4!, phash5!)!)
         
         guard let image6 = loadImageFromResource(named: "Pepper") else {
-            Issue.record("Failed to load image")
+            XCTFail("Failed to load the image.")
             return
         }
         let phash6 = SwiftImageHash.phash(image: image6)
