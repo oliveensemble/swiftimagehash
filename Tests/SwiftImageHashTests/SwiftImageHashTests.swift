@@ -10,64 +10,64 @@ import Testing
 
 struct SwiftImageHashTests {
     @Test func testDistanceCalculations() {
-        guard let image1 = loadImageFromResource(named: "astronaut_L") else {
+        guard let astronautL = loadImageFromResource(named: "astronaut_L") else {
             Issue.record("Failed to load image")
             return
         }
-        let phash1 = SwiftImageHash.phash(image: image1)
-        print(phash1!)
+        let astronautLHash = SwiftImageHash.phash(image: astronautL)
+        print(astronautLHash!)
         
-        guard let image2 = loadImageFromResource(named: "astronaut_M") else {
+        guard let astronautM = loadImageFromResource(named: "astronaut_M") else {
             Issue.record("Failed to load image")
             return
         }
-        let phash2 = SwiftImageHash.phash(image: image2)
-        print(phash2!)
-        print(SwiftImageHash.distanceBetween(phash1!, phash2!)!)
+        let astronautMHash = SwiftImageHash.phash(image: astronautM)
+        print(astronautMHash!)
+        print(SwiftImageHash.distanceBetween(astronautLHash!, astronautMHash!)!)
         
-        guard let image3 = loadImageFromResource(named: "astronaut") else {
+        guard let astronaut = loadImageFromResource(named: "astronaut") else {
             Issue.record("Failed to load image")
             return
         }
-        let phash3 = SwiftImageHash.phash(image: image3)
-        print(phash3!)
-        print(SwiftImageHash.distanceBetween(phash1!, phash3!)!)
-        print(SwiftImageHash.distanceBetween(phash2!, phash3!)!)
+        let astronautHash = SwiftImageHash.phash(image: astronaut)
+        print(astronautHash!)
+        print(SwiftImageHash.distanceBetween(astronautLHash!, astronautHash!)!)
+        print(SwiftImageHash.distanceBetween(astronautMHash!, astronautHash!)!)
         
-        guard let image4 = loadImageFromResource(named: "lenna") else {
+        guard let lenna = loadImageFromResource(named: "lenna") else {
             Issue.record("Failed to load image")
             return
         }
-        let phash4 = SwiftImageHash.phash(image: image4)
-        print(phash4!)
-        print(SwiftImageHash.distanceBetween(phash2!, phash4!)!)
-        print(SwiftImageHash.distanceBetween(phash3!, phash4!)!)
+        let lennaHash = SwiftImageHash.phash(image: lenna)
+        print(lennaHash!)
+        print(SwiftImageHash.distanceBetween(astronautMHash!, lennaHash!)!)
+        print(SwiftImageHash.distanceBetween(astronautHash!, lennaHash!)!)
         
-        guard let image5 = loadImageFromResource(named: "mandrill") else {
+        guard let mandrill = loadImageFromResource(named: "mandrill") else {
             Issue.record("Failed to load image")
             return
         }
-        let phash5 = SwiftImageHash.phash(image: image5)
-        print(phash5!)
-        print(SwiftImageHash.distanceBetween(phash3!, phash5!)!)
-        print(SwiftImageHash.distanceBetween(phash4!, phash5!)!)
+        let mandrillHash = SwiftImageHash.phash(image: mandrill)
+        print(mandrillHash!)
+        print(SwiftImageHash.distanceBetween(astronautHash!, mandrillHash!)!)
+        print(SwiftImageHash.distanceBetween(lennaHash!, mandrillHash!)!)
         
-        guard let image6 = loadImageFromResource(named: "pepper") else {
+        guard let pepper = loadImageFromResource(named: "pepper") else {
             Issue.record("Failed to load image")
             return
         }
-        let phash6 = SwiftImageHash.phash(image: image6)
-        print(phash6!)
-        print(SwiftImageHash.distanceBetween(phash4!, phash6!)!)
-        print(SwiftImageHash.distanceBetween(phash5!, phash6!)!)
+        let pepperHash = SwiftImageHash.phash(image: pepper)
+        print(pepperHash!)
+        print(SwiftImageHash.distanceBetween(lennaHash!, pepperHash!)!)
+        print(SwiftImageHash.distanceBetween(mandrillHash!, pepperHash!)!)
         
-        guard let image7 = loadImageFromResource(named: "mandrill_duplicate") else {
+        guard let mandrillDuplicate = loadImageFromResource(named: "mandrill_duplicate") else {
             Issue.record("Failed to load image")
             return
         }
-        let phash7 = SwiftImageHash.phash(image: image7)
-        print(phash7!)
-        print(SwiftImageHash.distanceBetween(phash6!, phash7!)!)
-        print(SwiftImageHash.distanceBetween(phash5!, phash7!)!)
+        let mandrillDuplicateHash = SwiftImageHash.phash(image: mandrillDuplicate)
+        print(mandrillDuplicateHash!)
+        print(SwiftImageHash.distanceBetween(pepperHash!, mandrillDuplicateHash!)!)
+        print(SwiftImageHash.distanceBetween(mandrillHash!, mandrillDuplicateHash!)!)
     }
 }
